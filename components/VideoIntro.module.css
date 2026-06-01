@@ -1,0 +1,403 @@
+/* ─── Hero wrapper ─────────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
+  overflow: hidden;
+  background: #000;
+  opacity: 0; /* GSAP fades in */
+}
+
+/* ─── Background ambient video (blurred) ───────────────────── */
+.bgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(40px) saturate(0.6) brightness(0.35);
+  transform: scale(1.08);
+  z-index: 0;
+}
+
+/* ─── Gradient overlays ─────────────────────────────────────── */
+.overlayBottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.overlayTop {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 30%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.overlayLeft {
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 28%;
+  background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.overlayRight {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 28%;
+  background: linear-gradient(to left, rgba(0,0,0,0.85) 0%, transparent 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.overlayVignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.55) 100%);
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* ─── Foreground video ──────────────────────────────────────── */
+.videoWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.fgVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.videoEdgeFade {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 50% 50%, transparent 30%, rgba(0,0,0,0.25) 100%);
+  pointer-events: none;
+}
+
+/* ─── Content overlay ───────────────────────────────────────── */
+.content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 0 6vw 9vh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.tagline {
+  font-family: var(--font-mono, 'Courier New', monospace);
+  font-size: clamp(0.6rem, 1.1vw, 0.78rem);
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 1rem;
+  opacity: 0; /* GSAP */
+}
+
+.nameBlock {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.88;
+  margin-bottom: 1.4rem;
+  opacity: 0; /* GSAP */
+}
+
+.firstName,
+.lastName {
+  font-family: var(--font-display, 'Arial Black', 'Helvetica Neue', sans-serif);
+  font-size: clamp(3.8rem, 10vw, 9.5rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: #fff;
+  margin: 0;
+  line-height: 0.92;
+  -webkit-text-stroke: 0px;
+  text-shadow:
+    0 0 80px rgba(255,255,255,0.08),
+    0 2px 40px rgba(0,0,0,0.6);
+}
+
+.lastName {
+  color: rgba(255,255,255,0.88);
+  -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+}
+
+.subtitle {
+  font-size: clamp(0.78rem, 1.4vw, 1.05rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.6);
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem 0;
+  opacity: 0; /* GSAP */
+}
+
+.subtitleDot {
+  color: rgba(255,255,255,0.25);
+}
+
+.supportingLine {
+  font-size: clamp(0.72rem, 1.2vw, 0.9rem);
+  font-weight: 300;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.06em;
+  margin: 0 0 2rem 0;
+  opacity: 0; /* GSAP */
+  font-style: italic;
+}
+
+/* ─── CTA button ────────────────────────────────────────────── */
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: clamp(0.7rem, 1.1vw, 0.82rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.7rem 1.6rem;
+  border-radius: 2px;
+  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.04);
+  transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  opacity: 0; /* GSAP */
+}
+
+.cta:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.cta svg {
+  transition: transform 0.3s ease;
+}
+
+.cta:hover svg {
+  transform: translateY(3px);
+}
+
+/* ─── Glassmorphism controls ────────────────────────────────── */
+.controls {
+  position: absolute;
+  bottom: 9vh;
+  right: 5vw;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.controlBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: rgba(255,255,255,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.2s ease;
+}
+
+.controlBtn:hover {
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.4);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+/* ─── Sound overlay ─────────────────────────────────────────── */
+.soundOverlay {
+  position: absolute;
+  top: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.07);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.15);
+  padding: 0.5rem 1.2rem;
+  border-radius: 100px;
+  white-space: nowrap;
+  cursor: pointer;
+  animation: soundOverlayIn 1s ease 1.5s both;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.soundOverlay:hover {
+  background: rgba(255,255,255,0.13);
+  color: #fff;
+}
+
+@keyframes soundOverlayIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.soundOverlayDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.soundOverlayText {
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* ─── Scroll indicator ──────────────────────────────────────── */
+.scrollIndicator {
+  position: absolute;
+  bottom: 3.5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.scrollLine {
+  width: 1px;
+  height: 44px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.0), rgba(255,255,255,0.5), rgba(255,255,255,0.0));
+  transform-origin: top;
+  opacity: 0; /* GSAP */
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+  0%   { background-position: 0 0; opacity: 0.3; }
+  50%  { opacity: 0.85; }
+  100% { background-position: 0 44px; opacity: 0.3; }
+}
+
+.scrollLabel {
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+}
+
+/* ─── Mobile ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .content {
+    padding: 0 5vw 10vh;
+    gap: 0;
+  }
+
+  .tagline {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    margin-bottom: 0.75rem;
+  }
+
+  .nameBlock {
+    margin-bottom: 1rem;
+  }
+
+  .firstName,
+  .lastName {
+    font-size: clamp(3.2rem, 18vw, 5.5rem);
+    line-height: 0.9;
+  }
+
+  .subtitle {
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+  }
+
+  .supportingLine {
+    font-size: 0.7rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .cta {
+    font-size: 0.68rem;
+    padding: 0.65rem 1.3rem;
+  }
+
+  .controls {
+    bottom: auto;
+    top: 4vh;
+    right: 4vw;
+    flex-direction: row;
+  }
+
+  .controlBtn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .scrollLine {
+    height: 32px;
+  }
+
+  /* Hide overlayLeft/Right on mobile — full bleed looks better */
+  .overlayLeft,
+  .overlayRight {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .firstName,
+  .lastName {
+    font-size: clamp(2.8rem, 20vw, 4.5rem);
+  }
+
+  .subtitle {
+    font-size: 0.72rem;
+  }
+
+  .content {
+    padding: 0 5vw 12vh;
+  }
+}
