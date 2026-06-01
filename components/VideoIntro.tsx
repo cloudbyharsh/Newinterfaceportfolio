@@ -46,6 +46,33 @@ export default function VideoIntro() {
     });
   }, [loaded]);
 
+  // Pause + mute when hero scrolls out of view, resume when back
+  useEffect(() => {
+    const section = heroRef.current;
+    if (!section) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const video = videoRef.current;
+        const bgVideo = bgVideoRef.current;
+        if (!video) return;
+        if (!entry.isIntersecting) {
+          video.pause();
+          video.muted = true;
+          bgVideo?.pause();
+          setMuted(true);
+          setPlaying(false);
+        } else {
+          video.play().catch(() => {});
+          bgVideo?.play().catch(() => {});
+          setPlaying(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   // On any user interaction anywhere in the hero, try to unmute
   const handleFirstInteraction = () => {
     if (!showSoundOverlay) return;
