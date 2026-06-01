@@ -287,34 +287,92 @@
 
 /* ─── Mobile ────────────────────────────────────────────────── */
 @media (max-width: 640px) {
+  .section {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
   .header {
     padding: 5rem 5vw 2.5rem;
     gap: 1rem;
   }
 
+  .sectionTitle {
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+    word-break: break-word;
+  }
+
   .aboutContent {
     padding: 2.5rem 5vw 0;
+    max-width: 100%;
+  }
+
+  .aboutLead {
+    font-size: clamp(1rem, 4.5vw, 1.2rem);
   }
 
   .stats {
     grid-template-columns: repeat(2, 1fr);
     margin: 2.5rem 5vw 0;
+    width: calc(100% - 10vw);
   }
 
   .stat {
-    padding: 1.4rem 1rem;
+    padding: 1.2rem 0.8rem;
+  }
+
+  .statValue {
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
   }
 
   .timeline {
     padding: 2rem 5vw 0;
   }
 
+  .timelineItem {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+    padding: 2rem 0;
+  }
+
+  .company {
+    font-size: clamp(0.95rem, 4vw, 1.2rem);
+  }
+
+  .highlight {
+    font-size: 0.75rem;
+  }
+
   .skillsBlock {
-    padding: 4rem 5vw 5rem;
+    padding: 3rem 5vw 5rem;
   }
 
   .skillsGrid {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+}
+
+/* ─── Small phones (≤380px) ─────────────────────────────────── */
+@media (max-width: 380px) {
+  .header {
+    padding: 4rem 4vw 2rem;
+  }
+
+  .aboutContent {
+    padding: 2rem 4vw 0;
+  }
+
+  .stats {
+    margin: 2rem 4vw 0;
+    width: calc(100% - 8vw);
+  }
+
+  .timeline {
+    padding: 1.5rem 4vw 0;
+  }
+
+  .skillsBlock {
+    padding: 2.5rem 4vw 4rem;
   }
 }

@@ -280,6 +280,8 @@
 @media (max-width: 640px) {
   .section {
     padding: 6rem 0 5rem;
+    overflow-x: hidden;
+    width: 100%;
   }
 
   .header {
@@ -287,10 +289,17 @@
     gap: 1rem;
   }
 
+  .sectionTitle {
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+    word-break: break-word;
+  }
+
   .item {
     grid-template-columns: 1fr;
-    padding: 2.5rem 5vw;
-    gap: 1.2rem;
+    padding: 2rem 5vw;
+    gap: 1rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .itemLeft {
@@ -303,14 +312,53 @@
     display: none;
   }
 
+  .itemTitle {
+    font-size: clamp(1.3rem, 6vw, 1.8rem);
+    word-break: break-word;
+  }
+
+  .itemTagline {
+    font-size: 0.8rem;
+  }
+
+  .itemBody {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .blockText {
+    font-size: 0.78rem;
+  }
+
   .itemFooter {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.8rem;
   }
 
   .itemMeta {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 0.6rem;
+  }
+
+  .stack {
+    flex-wrap: wrap;
+  }
+}
+
+/* ─── Small phones (≤380px) ─────────────────────────────────── */
+@media (max-width: 380px) {
+  .header {
+    padding: 0 4vw 2.5rem;
+  }
+
+  .item {
+    padding: 1.8rem 4vw;
+  }
+
+  .sectionTitle {
+    font-size: 1.5rem;
   }
 }

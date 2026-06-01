@@ -15,25 +15,21 @@ export default function VideoIntro() {
 
   const [muted, setMuted] = useState(true);
   const [playing, setPlaying] = useState(true);
-  const [showSoundHint, setShowSoundHint] = useState(false);
   const [showSoundOverlay, setShowSoundOverlay] = useState(true);
   const [loaded, setLoaded] = useState(false);
 
   // GSAP entrance animation
   useEffect(() => {
-    let gsap: typeof import('gsap').gsap;
     import('gsap').then(({ gsap: g }) => {
-      gsap = g;
-      const tl = gsap.timeline({ delay: 0.3 });
+      const tl = g.timeline({ delay: 0.3 });
       tl.fromTo(
         heroRef.current,
         { opacity: 0 },
         { opacity: 1, duration: 1.2, ease: 'power2.out' }
       );
       if (contentRef.current) {
-        const children = contentRef.current.children;
         tl.fromTo(
-          Array.from(children),
+          Array.from(contentRef.current.children),
           { opacity: 0, y: 32 },
           { opacity: 1, y: 0, duration: 1.0, stagger: 0.15, ease: 'power3.out' },
           '-=0.6'
@@ -50,22 +46,38 @@ export default function VideoIntro() {
     });
   }, [loaded]);
 
-  const enableSound = () => {
-    if (!videoRef.current) return;
-    videoRef.current.muted = false;
+  // On any user interaction anywhere in the hero, try to unmute
+  const handleFirstInteraction = () => {
+    if (!showSoundOverlay) return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = false;
+    video.play().catch(() => {
+      // Blocked — keep muted
+      video.muted = true;
+      setMuted(true);
+    });
     setMuted(false);
     setShowSoundOverlay(false);
   };
 
-  const toggleMute = () => {
-    if (!videoRef.current) return;
+  const enableSound = (e: React.MouseEvent | React.TouchEvent) => {
+    e.stopPropagation();
+    handleFirstInteraction();
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
     const next = !muted;
-    videoRef.current.muted = next;
+    video.muted = next;
     setMuted(next);
     setShowSoundOverlay(false);
   };
 
-  const togglePlay = () => {
+  const togglePlay = (e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!videoRef.current) return;
     if (playing) {
       videoRef.current.pause();
@@ -77,17 +89,20 @@ export default function VideoIntro() {
     setPlaying(!playing);
   };
 
-  const scrollToNext = () => {
-    const next = document.getElementById('work');
-    if (next) {
-      next.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
-    }
+  const scrollToNext = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const next = document.getElementById('about');
+    if (next) next.scrollIntoView({ behavior: 'smooth' });
+    else window.scrollBy({ top: window.innerHeight, behavior: 'smooth' });
   };
 
   return (
-    <section className={styles.hero} ref={heroRef}>
+    <section
+      className={styles.hero}
+      ref={heroRef}
+      onClick={handleFirstInteraction}
+      onTouchEnd={handleFirstInteraction}
+    >
       {/* Ambient blurred background video */}
       <video
         ref={bgVideoRef}
@@ -122,7 +137,6 @@ export default function VideoIntro() {
           playsInline
           onCanPlay={() => setLoaded(true)}
         />
-        {/* Subtle edge fade on video */}
         <div className={styles.videoEdgeFade} />
       </div>
 
@@ -145,7 +159,11 @@ export default function VideoIntro() {
           From the front lines of CS to the heart of product.
         </p>
 
-        <a href="#work" className={styles.cta} onClick={(e) => { e.preventDefault(); scrollToNext(); }}>
+        <a
+          href="#about"
+          className={styles.cta}
+          onClick={scrollToNext}
+        >
           <span>See What I Build</span>
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
             <path d="M7 1v12M1 7l6 6 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -183,9 +201,14 @@ export default function VideoIntro() {
         </button>
       </div>
 
-      {/* Sound-on overlay — shown on load, click to enable audio */}
+      {/* Tap for sound overlay */}
       {showSoundOverlay && (
-        <button className={styles.soundOverlay} onClick={enableSound} aria-label="Enable sound">
+        <button
+          className={styles.soundOverlay}
+          onClick={enableSound}
+          onTouchEnd={enableSound}
+          aria-label="Enable sound"
+        >
           <span className={styles.soundOverlayDot} />
           <span className={styles.soundOverlayText}>Tap for sound</span>
         </button>

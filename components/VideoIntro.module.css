@@ -390,14 +390,39 @@
 @media (max-width: 480px) {
   .firstName,
   .lastName {
-    font-size: clamp(2.8rem, 20vw, 4.5rem);
+    font-size: clamp(2.6rem, 18vw, 4rem);
   }
 
   .subtitle {
-    font-size: 0.72rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.01em;
   }
 
   .content {
     padding: 0 5vw 12vh;
+  }
+}
+
+@media (max-width: 380px) {
+  .firstName,
+  .lastName {
+    font-size: clamp(2.2rem, 16vw, 3.2rem);
+  }
+
+  .tagline {
+    font-size: 0.55rem;
+    letter-spacing: 0.18em;
+  }
+
+  .subtitle {
+    font-size: 0.65rem;
+  }
+
+  .supportingLine {
+    font-size: 0.62rem;
+  }
+
+  .content {
+    padding: 0 4vw 12vh;
   }
 }

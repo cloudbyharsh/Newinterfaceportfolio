@@ -265,9 +265,19 @@
 
 /* ─── Mobile ────────────────────────────────────────────────── */
 @media (max-width: 640px) {
+  .recoSection {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
   .header {
     padding: 5rem 5vw 2.5rem;
     gap: 1rem;
+  }
+
+  .sectionTitle {
+    font-size: clamp(1.6rem, 7vw, 2.4rem);
+    word-break: break-word;
   }
 
   .recoGrid {
@@ -276,27 +286,73 @@
     gap: 1rem;
   }
 
+  .recoCard {
+    padding: 1.5rem;
+  }
+
+  .recoQuote {
+    font-size: 0.8rem;
+  }
+
   .recoFooter {
     padding: 2rem 5vw 0;
   }
 
   .contactInner {
-    padding: 6rem 5vw 4rem;
+    padding: 5rem 5vw 3rem;
     gap: 1.2rem;
+    max-width: 100%;
   }
 
   .contactTitle {
-    font-size: clamp(2.2rem, 11vw, 3.5rem);
+    font-size: clamp(2rem, 10vw, 3rem);
+    word-break: break-word;
+  }
+
+  .contactSub {
+    font-size: 0.82rem;
+    max-width: 100%;
   }
 
   .contactActions {
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .primaryAction {
+    font-size: 0.78rem;
+    word-break: break-all;
+  }
+
+  .contactLinks {
+    flex-wrap: wrap;
+    gap: 0.5rem;
   }
 
   .footer {
     padding: 1.5rem 5vw;
     flex-direction: column;
     align-items: flex-start;
+    gap: 0.3rem;
+  }
+}
+
+/* ─── Small phones (≤380px) ─────────────────────────────────── */
+@media (max-width: 380px) {
+  .header {
+    padding: 4rem 4vw 2rem;
+  }
+
+  .recoGrid {
+    padding: 2rem 4vw 0;
+  }
+
+  .contactInner {
+    padding: 4rem 4vw 3rem;
+  }
+
+  .contactTitle {
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
   }
 }
