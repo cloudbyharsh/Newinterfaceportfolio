@@ -125,7 +125,7 @@
 .firstName,
 .lastName {
   font-family: var(--font-display, 'Arial Black', 'Helvetica Neue', sans-serif);
-  font-size: clamp(3.8rem, 10vw, 9.5rem);
+  font-size: clamp(3rem, 7vw, 7rem);
   font-weight: 900;
   letter-spacing: -0.03em;
   color: #fff;
@@ -237,9 +237,9 @@
 /* ─── Sound overlay ─────────────────────────────────────────── */
 .soundOverlay {
   position: absolute;
-  top: 5vh;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 9vh;
+  right: 5vw;
+  transform: none;
   z-index: 20;
   display: flex;
   align-items: center;
@@ -266,8 +266,8 @@
 }
 
 @keyframes soundOverlayIn {
-  from { opacity: 0; transform: translateX(-50%) translateY(-6px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .soundOverlayDot {
