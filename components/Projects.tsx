@@ -119,11 +119,8 @@ export default function Projects() {
     <section id="work" className={styles.section} ref={sectionRef}>
       {/* Section header */}
       <div className={styles.header}>
-        <span className={styles.sectionNum}>02</span>
-        <div>
-          <span className={styles.sectionLabel}>Work Samples</span>
-          <h2 className={styles.sectionTitle}>What I build.</h2>
-        </div>
+        <span className={styles.sectionLabel}>02 — Work Samples</span>
+        <h2 className={styles.sectionTitle}>What I build.</h2>
       </div>
 
       {/* Project list */}

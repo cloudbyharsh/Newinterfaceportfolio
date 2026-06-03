@@ -90,11 +90,8 @@ export default function About() {
       {/* ── About block ───────────────────────────────────── */}
       <div className={styles.aboutBlock}>
         <div className={styles.header}>
-          <span className={styles.sectionNum}>01</span>
-          <div>
-            <span className={styles.sectionLabel}>About</span>
-            <h2 className={styles.sectionTitle}>Who I am.</h2>
-          </div>
+          <span className={styles.sectionLabel}>01 — About</span>
+          <h2 className={styles.sectionTitle}>Who I am.</h2>
         </div>
 
         <div
@@ -136,11 +133,8 @@ export default function About() {
       {/* ── Experience block ──────────────────────────────── */}
       <div className={styles.expBlock} id="experience">
         <div className={styles.header}>
-          <span className={styles.sectionNum}>03</span>
-          <div>
-            <span className={styles.sectionLabel}>Work History</span>
-            <h2 className={styles.sectionTitle}>Where I&apos;ve been.</h2>
-          </div>
+          <span className={styles.sectionLabel}>03 — Work History</span>
+          <h2 className={styles.sectionTitle}>Where I&apos;ve been.</h2>
         </div>
 
         <div className={styles.timeline}>

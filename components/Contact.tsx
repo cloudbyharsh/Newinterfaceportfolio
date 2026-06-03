@@ -44,11 +44,8 @@ export default function Contact() {
       {/* ── Recommendations ─────────────────────────────── */}
       <section id="recommendations" className={styles.recoSection}>
         <div className={styles.header}>
-          <span className={styles.sectionNum}>04</span>
-          <div>
-            <span className={styles.sectionLabel}>Recommendations</span>
-            <h2 className={styles.sectionTitle}>What my leaders say.</h2>
-          </div>
+          <span className={styles.sectionLabel}>04 — Recommendations</span>
+          <h2 className={styles.sectionTitle}>What my leaders say.</h2>
         </div>
 
         <div className={styles.recoGrid}>
