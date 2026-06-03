@@ -3,6 +3,8 @@
   background: #050505;
   padding: 10rem 0 8rem;
   min-height: 100vh;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* ─── Header ────────────────────────────────────────────────── */
@@ -56,6 +58,9 @@
   padding: 3.5rem 6vw;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   transition: background 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .item:hover {

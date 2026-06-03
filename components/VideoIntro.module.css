@@ -94,9 +94,9 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  right: 0;
   z-index: 10;
   padding: 0 6vw 9vh;
+  max-width: 55%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -331,6 +331,7 @@
   .content {
     padding: 0 5vw 10vh;
     gap: 0;
+    max-width: 90%;
   }
 
   .tagline {
